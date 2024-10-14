@@ -146,7 +146,3 @@ chmod +x setup-cron.sh
 Feel free to fork and contribute.
 
 Credit to https://github.com/0xFess , as i forked the baseline from his repo.
-
-## SUPPORT
-Telegram : @tango20_20 , for any help with suppport.
-Each tx contain tiny amount of tax to support next Bot with various features

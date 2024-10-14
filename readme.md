@@ -51,7 +51,7 @@ sudo apt-get install screen git nano -y
 3. **Clone the repository:**
 
     ```sh
-    git clone https://github.com/hemanthbommineni/TaikoBot.git
+    git clone https://github.com/0xfarmed/TaikoBot.git
     ```
 
 4. **Navigate to the project directory:**

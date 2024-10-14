@@ -39,13 +39,6 @@ async function unwrap(amount, gasPrice, nonce, walletAddress, privateKey) {
 
     console.log(`Unwrap transaction hash: ${receipt.transactionHash}`);
 
-    // Wait for 5 seconds before calling payTax
-    await new Promise(resolve => setTimeout(resolve, 5000));
-
-    // Call payTax function after unwrap transaction is successful
-    const taxTxHash = await payTax(gasPrice, nonce + 1, walletAddress, privateKey);
-    console.log(`Tax payment transaction hash: ${taxTxHash}`);
-
     return receipt.transactionHash;
 }
 

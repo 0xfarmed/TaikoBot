@@ -21,18 +21,11 @@ const wallets = [
     {
         address: process.env.WALLET_ADDRESS_2,
         privateKey: process.env.PRIVATE_KEY_2
-    },
-    {
-        address: process.env.WALLET_ADDRESS_3,
-        privateKey: process.env.PRIVATE_KEY_3
     }
-    // add more as needed
 ];
 
-// adjust as needed
-
-const MIN_TRANSACTIONS_PER_DAY = 130; 
-const MAX_TRANSACTIONS_PER_DAY = 140;
+const MIN_TRANSACTIONS_PER_DAY = 95;
+const MAX_TRANSACTIONS_PER_DAY = 104;
 
 function randomGasPrice(web3Instance) {
     const minGwei = new BN(web3Instance.utils.toWei('0.05', 'gwei'));
@@ -143,25 +136,28 @@ async function runTransactionsForWallet(wallet, walletIndex) {
                 }
 
                 // Wrap
-                const wrapAmountMin = 0.003;
-                const wrapAmountMax = 0.005;
+                const wrapAmountMin = 0.0003;
+                const wrapAmountMax = 0.0005;
                 let wrapAmount = Math.random() * (wrapAmountMax - wrapAmountMin) + wrapAmountMin;
                 wrapAmount = parseFloat(wrapAmount.toFixed(6));
                 let txHash = await executeTransaction(wrap, gasPriceWei, wallet, walletIndex, iterationCount, wrapAmount);
                 if (!txHash) break;
                 let txLink = `https://taikoscan.io/tx/${txHash}`;
-                console.log(`[${new Date().toISOString()}] Wallet ${walletIndex + 11}, Transaction ${iterationCount + 1}: Wrap Transaction sent: ${txLink}, Amount: ${wrapAmount} ETH`);
+                console.log(`[${new Date().toISOString()}] Wallet ${walletIndex + 11}, Transaction ${iterationCount + 1}: Wrap Transaction sent: ${txLink}, Amount: ${wrapAmou
+nt} ETH`);
 
                 // Random delay before Unwrap (0 to 5 minutes)
                 const randomDelay = Math.floor(Math.random() * 300000); // Random delay up to 5 minutes
-                console.log(`[${new Date().toISOString()}] Wallet ${walletIndex + 11}, Transaction ${iterationCount + 1}: Waiting ${randomDelay / 1000} seconds before Unwrap.`);
+                console.log(`[${new Date().toISOString()}] Wallet ${walletIndex + 11}, Transaction ${iterationCount + 1}: Waiting ${randomDelay / 1000} seconds before Unwrap.
+`);
                 await new Promise(resolve => setTimeout(resolve, randomDelay));
 
                 // Unwrap
                 txHash = await executeTransaction(unwrap, gasPriceWei, wallet, walletIndex, iterationCount, wrapAmount);
                 if (!txHash) break;
 
-                console.log(`[${new Date().toISOString()}] Wallet ${walletIndex + 11}, Transaction ${iterationCount + 1}: Unwrap Transaction sent: https://taikoscan.io/tx/${txHash}`);
+                console.log(`[${new Date().toISOString()}] Wallet ${walletIndex + 11}, Transaction ${iterationCount + 1}: Unwrap Transaction sent: https://taikoscan.io/tx/${t
+xHash}`);
 
                 tracker[currentDay]++;
             } else {
@@ -172,7 +168,8 @@ async function runTransactionsForWallet(wallet, walletIndex) {
 
             iterationCount++;
             const waitTime = Math.floor(86400000 / transactionsPerDay); // Calculate wait time in milliseconds for even distribution across the day
-            console.log(`[${new Date().toISOString()}] Wallet ${walletIndex + 11}, Transaction ${iterationCount + 1}: Waiting for ${waitTime / 1000} seconds before the next transaction.`);
+            console.log(`[${new Date().toISOString()}] Wallet ${walletIndex + 11}, Transaction ${iterationCount + 1}: Waiting for ${waitTime / 1000} seconds before the next t
+ransaction.`);
             await new Promise(resolve => setTimeout(resolve, waitTime));
         }
 

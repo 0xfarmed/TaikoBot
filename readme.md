@@ -139,7 +139,6 @@ chmod +x setup-cron.sh
 
 - Lends a random amount between 1 USDC to 2 USDC into the minterest Dapp.
 - Withdraws all USDC from the minterest Dapp
-- Multiple wallets support (currently only one wallets is supported
 
 ## CONTRIBUTE
 
